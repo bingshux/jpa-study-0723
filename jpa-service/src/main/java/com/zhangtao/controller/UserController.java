@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -40,7 +41,7 @@ public class UserController {
         String str = "2020-12-12 20:20:50";
         Date date = simpleDateFormat.parse(String.valueOf(str));
         hgUser.setBirthday(date);
-        hgUser.setSex("男");
+        hgUser.setSex(0);
         hgUser.setTelephone("1324567892");
         hgUser.setCode("1");
         hgUser.setState(0);
@@ -51,5 +52,13 @@ public class UserController {
     public MyPageImpl<User> list(@RequestBody UserVo userVo)   {
         MyPageImpl<User> page =  userService.list(userVo);
        return page;
+    }
+    @RequestMapping("del")
+    public boolean del(@RequestParam(value = "id") Integer id){
+       return userService.del(id);
+    }
+    @RequestMapping("add")
+    public boolean add(@RequestBody User user){
+        return userService.add(user);
     }
 }

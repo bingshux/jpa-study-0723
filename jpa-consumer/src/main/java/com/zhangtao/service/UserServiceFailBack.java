@@ -15,4 +15,14 @@ public class UserServiceFailBack implements  UserService{
     public MyPageImpl<User> list(UserVo userVo) {
         return null;
     }
+
+    @Override
+    public boolean del(Integer id) {
+        return false;
+    }
+
+    @Override
+    public boolean add(User user) {
+        return false;
+    }
 }

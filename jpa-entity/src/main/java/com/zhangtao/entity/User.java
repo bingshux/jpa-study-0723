@@ -1,7 +1,9 @@
 package com.zhangtao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javassist.SerialVersionUID;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,10 +22,15 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String telephone;
-    @Temporal(TemporalType.TIMESTAMP)
-    // @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
-    private String sex;
+    private Integer sex;
     private Integer state;
     private String code;
+    @OneToOne(targetEntity = DriverCard.class,cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "card_id",referencedColumnName = "id",
+            insertable = true,updatable = false,nullable = true)
+    private DriverCard driverCard;
 }
