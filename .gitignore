@@ -20,3 +20,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+/jpa-consumer/target/
+/jpa-entity/target/
+/jpa-eureka/target/
+/jpa-service/
