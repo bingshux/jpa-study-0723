@@ -1,5 +1,6 @@
 package com.zhangtao.controller;
 
+import com.zhangtao.entity.Depart;
 import com.zhangtao.entity.MyPageImpl;
 import com.zhangtao.entity.User;
 import com.zhangtao.entity.UserVo;
@@ -7,6 +8,8 @@ import com.zhangtao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -25,5 +28,9 @@ public class UserController {
     @RequestMapping("add")
     public boolean add(@RequestBody User user){
         return  userService.add(user);
+    }
+    @RequestMapping("departs")
+    public List<Depart> getDeparts(){
+        return userService.listDeparts();
     }
 }

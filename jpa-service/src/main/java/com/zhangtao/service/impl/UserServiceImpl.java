@@ -1,9 +1,11 @@
 package com.zhangtao.service.impl;
 
 
+import com.zhangtao.entity.Depart;
 import com.zhangtao.entity.MyPageImpl;
 import com.zhangtao.entity.User;
 import com.zhangtao.entity.UserVo;
+import com.zhangtao.repository.DepartRepository;
 import com.zhangtao.repository.UserRepository;
 import com.zhangtao.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -27,7 +29,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    DepartRepository departRepository;
     @Override
     public MyPageImpl<User> list(UserVo userVo) {
 
@@ -96,6 +99,11 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+    }
+
+    @Override
+    public List<Depart> listDeparts() {
+        return  departRepository.findAll();
     }
 
 }

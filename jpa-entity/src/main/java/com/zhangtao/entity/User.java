@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 import java.util.Date;
 
 @Data
@@ -29,8 +30,18 @@ public class User implements Serializable {
     private Integer sex;
     private Integer state;
     private String code;
+
+
     @OneToOne(targetEntity = DriverCard.class,cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "card_id",referencedColumnName = "id",
             insertable = true,updatable = false,nullable = true)
     private DriverCard driverCard;
+
+    //多对一
+    @ManyToOne(targetEntity = Depart.class,cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+    @JoinColumn(name = "depart_id",referencedColumnName = "id",
+                insertable = true,updatable = true,
+                nullable = true,
+               foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+    private Depart depart;
 }
